@@ -1,4 +1,12 @@
+<p align="left">
+  <a href="https://www.python.org/"><img alt="Made with python" src="https://img.shields.io/badge/Made%20with-Python-3776ab?labelColor=171818"></a>
+  <a href="license"><img alt="License MIT" src="https://img.shields.io/badge/License-MIT-green"></a>
+  <img alt="Animations 2" src="https://img.shields.io/badge/Animations-2-6baf92">
+</p>
+
 # Python animations
+
+Animations for several algorithms and games for a better understanding on how they work.
 
 ## Monte Carlo Animations
 
