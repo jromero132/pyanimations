@@ -12,8 +12,15 @@ class MonteCarloPiEstimation:
 	def __init__(self, display: "Display"):
 		self.display = display
 
+	@staticmethod
+	def expected_value():
+		return 3.1415
+
+	@property
+	def pi(self):
+		return 4 * self.cnt_in_points / self.cnt_all_points
+
 	def init(self):
-		self.pi = 0
 		self.cnt_in_points = 0
 		self.cnt_all_points = 0
 
@@ -33,7 +40,6 @@ class MonteCarloPiEstimation:
 		in_points, out_points = self.step()
 		self.cnt_in_points += len(in_points[ 0 ])
 		self.cnt_all_points += len(in_points[ 0 ]) + len(out_points[ 0 ])
-		self.pi = 4 * self.cnt_in_points / self.cnt_all_points
 		self.display.display_step(self, i, in_points, out_points)
 
 	def estimate(self):
@@ -71,8 +77,9 @@ class GraphicDisplay(Display):
 		self.pi_estimation_graph.set_ylim(0, 5)
 		self.pi_estimation_graph.set_title("Pi Estimation")
 		self.pi_estimation_graph.set_xlabel(f"Iteration")
-		self.pi_estimation_graph.set_ylabel(f"Pi Estimation")
-		self.pi_estimation_graph.axhline(y = 3.1415, color = "red", linestyle = "--")
+		expected_value = MonteCarloPiEstimation.expected_value()
+		self.pi_estimation_graph.set_ylabel(f"Pi Estimation (E = {expected_value})")
+		self.pi_estimation_graph.axhline(y = expected_value, color = "red", linestyle = "--")
 
 		self.fig.tight_layout()
 		self.estimations = [ [], [] ]
@@ -89,7 +96,7 @@ class GraphicDisplay(Display):
 	def estimate(self, func: "Function"):
 		self.init()
 		anim = animation.FuncAnimation(self.fig, func, frames = self.iterations, init_func = lambda: None, repeat = False)
-		# anim.save("monte_carlo_pi.gif")
+		# anim.save("demo.gif")
 		plt.show()
 
 class ConsoleDisplay(Display):
